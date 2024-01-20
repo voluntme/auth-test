@@ -50,7 +50,9 @@ const options: NextAuthOptions = {
   debug: true,
 }
 
-const auth = (req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, options)
+const auth = (req: NextApiRequest, res: NextApiResponse) => {
+  res.setHeader('Set-Cookie', 'foo=bar; Path=/; HttpOnly; SameSite=Lax')
+  return NextAuth(req, res, options)
+}
 
 export default auth
